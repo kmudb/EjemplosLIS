@@ -91,7 +91,7 @@ if(isset($_POST["Guardar"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
 if(isset($_POST["Mostrar"]) ){
     session_start();
 if(count($_SESSION['data'])===0){
-echo "No hay datos registrados";
+echo "<h1>No hay datos registrados</h1>";
 }else{
 
           echo "<table class='table'>";
