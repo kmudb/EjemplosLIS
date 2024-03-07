@@ -1,0 +1,30 @@
+{
+    "opciones": 
+    {
+    "1": [ 
+        {"id": 1, "nombre": "Ingeniería Mecánica"},
+        {"id": 2, "nombre": "Ingeniería Industrial "},
+        {"id": 3, "nombre": "Ingeniería Biomédica"},
+        {"id": 4, "nombre": "Ingeniería en Ciencias de la Computación"},
+        {"id": 5, "nombre": "Ingeniería Eléctrica"},
+        {"id": 6, "nombre": "Ingeniería en Telecomunicaciones y Redes "}
+    ], 
+    "2": [ 
+        {"id": 7, "nombre": "Técnico en Ingeniería Mecánica"},
+        {"id": 8, "nombre": "Técnico en Ingeniería en Ciencias de la Computación"}
+    ],
+    "3":[
+        {"id":9,"nombre":"Licenciatura en Ciencias de la Comunicación"},
+        {"id":10,"nombre":"Licenciatura en Diseño Gráfico"},
+        {"id":11,"nombre":"Licenciatura en Diseño Industrial"}
+    ]
+},
+    "carrerasT": 
+    [ 
+        {"id": 1, "nombre": "Ingeniería"},
+        {"id": 2, "nombre": "Técnico "},
+        {"id": 3, "nombre":"Licenciaturas"}
+    ]
+
+}
+  
