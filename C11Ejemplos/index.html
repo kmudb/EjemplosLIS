@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mantenimiento de Productos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Mantenimiento de Productos</h2>
+
+    <!-- Formulario para agregar un nuevo producto -->
+    <form id="formulario-producto" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+        </div>
+        <div class="form-group">
+            <label for="descripcion">Descripción:</label>
+            <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+        </div>
+        <div class="form-group">
+            <label for="precio">Precio:</label>
+            <input type="number" class="form-control" id="precio" name="precio" min="0" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label for="imagen">Imagen:</label>
+            <input type="file" class="form-control-file" id="imagen" name="imagen" required accept="image/*">
+        </div>
+        <button type="submit" class="btn btn-primary">Agregar Producto</button>
+    </form>
+
+    <!-- Contenedor para mostrar los productos -->
+    <div id="contenedor-productos" class="mt-5"></div>
+</div>
+
+<!-- Script de jQuery para manejar el envío del formulario y cargar los productos -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Manejar el envío del formulario
+    $('#formulario-producto').submit(function(event) {
+        event.preventDefault();
+        
+        var formData = new FormData(this);
+        
+        $.ajax({
+            url: 'agregar_producto.php',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                alert(response);
+                cargarProductos();
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    // Cargar los productos al cargar la página
+    cargarProductos();
+
+    function cargarProductos() {
+        $.ajax({
+            url: 'productos.php',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                mostrarProductos(data);
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    function mostrarProductos(productos) {
+        var contenedorProductos = $('#contenedor-productos');
+        contenedorProductos.empty();
+
+        if (productos.length === 0) {
+            contenedorProductos.append('<p>No hay productos disponibles.</p>');
+        } else {
+            var row = $('<div class="row"></div>');
+
+            productos.forEach(function(producto) {
+                var col = $('<div class="col-md-4 mb-3"></div>');
+                var card = $('<div class="card"></div>');
+                var img = $('<img src="' + producto.imagen_ruta + '" class="card-img-top" alt="Imagen del Producto">');
+                var cardBody = $('<div class="card-body"></div>');
+                var title = $('<h5 class="card-title">' + producto.nombre + '</h5>');
+                var description = $('<p class="card-text">' + producto.descripcion + '</p>');
+                var price = $('<p class="card-text">Precio: $' + producto.precio + '</p>');
+
+                cardBody.append(title, description, price);
+                card.append(img, cardBody);
+                col.append(card);
+                row.append(col);
+            });
+
+            contenedorProductos.append(row);
+        }
+    }
+});
+</script>
+
+</body>
+</html>
