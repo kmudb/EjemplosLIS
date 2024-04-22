@@ -8,5 +8,5 @@ CREATE TABLE IF NOT EXISTS productos (
     nombre VARCHAR(255) NOT NULL,
     descripcion TEXT NOT NULL,
     precio DECIMAL(10, 2) NOT NULL,
-    imagen_ruta VARCHAR(255) NOT NULL;
+    imagen_ruta VARCHAR(255) NOT NULL
 );
